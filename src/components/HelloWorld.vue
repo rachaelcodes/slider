@@ -1,20 +1,24 @@
 <template>
   <div class="hello">
-    <sly-container />
+    <sly-container :views="views">
+      <sly-view v-for="view in views" :key="view" :slot="view" :num="view"/>
+    </sly-container>
   </div>
 </template>
 
 <script>
 import SlyContainer from './SlyContainer.vue'
+import SlyView from './SlyView.vue'
 
 export default {
   name: 'HelloWorld',
   components: {
-    'sly-container': SlyContainer
+    'sly-container': SlyContainer,
+    'sly-view': SlyView,
   },
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App',
+      views: ['one', 'two', 'three']
     };
   },
 };

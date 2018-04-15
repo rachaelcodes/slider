@@ -2,10 +2,9 @@
     <div class="sl-container">
         <div class="sl-view">
             <div ref="transition" class="sl-slide">
-                    <!-- <component v-bind:is="views[viewIndex]"/> -->
-                    <!-- <div v-for="view in views" :key="view"> -->
-                        <sly-view v-for="(view, index) in views" :key="view" :num="view" v-if="index===viewIndex"/>
-                    <!-- </div> -->
+                    <slot v-if="viewIndex===0" name="one"></slot>
+                    <slot v-if="viewIndex===1" name="two"></slot>
+                    <slot v-if="viewIndex===2" name="three"></slot>
             </div>
         </div>
         <div class="sl-nav">
@@ -30,14 +29,12 @@ export default {
   data: function () {
       return {
           viewIndex: 0,
-          views: ['one', 'two', 'three']
+        //   views: ['one', 'two', 'three']
       }
   },
+  props: ['views'],
   components: {
       'sly-view': SlyView,
-    //   'one': {template: '<div class="sl-element one" ></div>'},
-    //   'two': {template: '<div class="sl-element two" ></div>'},
-    //   'three': {template: '<div class="sl-element three" ></div>'}
   },
   methods: {
       moveRight: function () {
@@ -121,10 +118,10 @@ export default {
     width: 400px;
 }
 
-.sl-element {
+/* .sl-element {
     height: 400px;
     width: 400px;
-}
+} */
 
 .sl-btn {
     border:none;
@@ -135,17 +132,17 @@ export default {
     padding-top: 15px;
 }
 
-.one {
-    background-image: url('../assets/packshot-parrot-petite-en-GB.jpg')
+/* .one {
+    background-image: url("../assets/bird.jpg")
 }
 
 .two {
-    background-image: url('../assets/packshot-butterfly-petite-en-GB.jpg')
+    background-image: url("../assets/deer.jpg")
 }
 
 .three {
-    background-image: url('../assets/packshot-jellyfish-petite-en-GB.jpg')
-}
+    background-image: url("../assets/fish.jpg")
+} */
 
 .slide-out-left {
     animation-duration: .3s;
