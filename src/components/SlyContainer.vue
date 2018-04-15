@@ -2,16 +2,16 @@
     <div class="sl-container">
         <div class="sl-view">
             <div ref="transition" class="sl-slide">
-                    <slot v-if="viewIndex===0" name="one"></slot>
-                    <slot v-if="viewIndex===1" name="two"></slot>
-                    <slot v-if="viewIndex===2" name="three"></slot>
+                    <div class="div" v-for="(view, index) in views" :key="view">
+                        <slot v-if="viewIndex===index" :name="view"></slot>
+                   </div>
             </div>
         </div>
         <div class="sl-nav">
             <button class='sl-btn' id="sl-left" v-on:click="this.moveLeft">
                 <img src="../assets/left-arrow.png" alt="toggle left">
             </button>
-            <button class='sl-btn' v-for="(view, index) in views" :key="view" v-on:click="updateIndex(index)">
+            <button class='sl-btn' v-for="(view, index) in views" :key="index" v-on:click="updateIndex(index)">
                 <img src="../assets/empty-circle.png" alt="tab" v-if="index!=viewIndex">
                 <img src="../assets/filled-circle.png" alt="tab" v-if="index===viewIndex">
                 </button>
@@ -28,8 +28,7 @@ import SlyView from './SlyView'
 export default {
   data: function () {
       return {
-          viewIndex: 0,
-        //   views: ['one', 'two', 'three']
+          viewIndex: 0
       }
   },
   props: ['views'],
